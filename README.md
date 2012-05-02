@@ -1,7 +1,7 @@
 # Solrのウェブサービスへの組込みと運用のTips
 
 ## 目次
-- [データのインポートとインデキシング](https://github.com/solr-tutorial/blob/master/doc/import-and-indexing.md)
+- [データのインポートとインデキシング](https://github.com/hatena/solr-tutorial/blob/master/doc/import-and-indexing.md)
 - [検索リクエストの作成とレスポンスの形式](https://github.com/hatena/solr-tutorial/blob/master/doc/creating-search-requests.md)
 - [マシンリソース・レプリケーション・冗長化構成](https://github.com/hatena/solr-tutorial/blob/master/doc/machine-resources.md)
 
