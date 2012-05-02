@@ -3,22 +3,37 @@
 
 Solrに文書をインポートする方法は、[複数提供](http://wiki.apache.org/solr/#Search_and_Indexing)されています。基本的な方法としては、[XML](http://wiki.apache.org/solr/UpdateXmlMessages)、[JSON](http://wiki.apache.org/solr/UpdateJSON)、[CSV](http://wiki.apache.org/solr/UpdateCSV)などの形式で決められたHTTPエンドポイントにHTTP POSTすることで登録できます。また、外部のデータベースなどから直接文書データを取り込むことが出来る [DataImportHandler](http://wiki.apache.org/solr/DataImportHandler) というツールが標準で提供されています。
 
-ここでは実際に使われるケースが多いであろう「DataImportHandlerでJDBCを使ってMySQLからSolrにデータをインデックスする」ときの基本的な手順と、その際のコツについて解説します。##	必要な設定ファイル
-$CORE_HOME は solr.core.instanceDir として指定されたディレクトリを示したものです。solr.xml 内で指定するか、あるいはcoreを作成するときに明示的に指定することができます。### ファイルの構成
-    $CORE_HOME/
+ここでは実際に使われるケースが多いであろう「DataImportHandlerでJDBCを使ってMySQLからSolrにデータをインデックスする」ときの基本的な手順と、その際のコツについて解説します。
+
+##	必要な設定ファイル
+
+$CORE_HOME は solr.core.instanceDir として指定されたディレクトリを示したものです。solr.xml 内で指定するか、あるいはcoreを作成するときに明示的に指定することができます。
+
+### ファイルの構成
+
+    $CORE_HOME/
       conf/
         solrconfig.xml
         data-config.xml
         schema.xml
       lib/
-        (3rd party製のトークナイザやJDBCドライバなどはここに配置するとSolrに認識される)### solrconfig.xml
+        (3rd party製のトークナイザやJDBCドライバなどはここに配置するとSolrに認識される)
+
+### solrconfig.xml
 
 キャッシュの量やリクエストハンドラ、レプリケーションの設定など、 Solrの全体的な動作を記述するのが solrconfig.xml です。基本的な使い方をしている間は、あまり設定することはないはずです。
 
 [SolrConfigXml - Solr Wiki](http://wiki.apache.org/solr/SolrConfigXml)
-### data-config.xmlDataImportHandlerを使ってインポートする方法を記述する設定ファイルです。例を使って説明します。
+
+### data-config.xml
+
+DataImportHandlerを使ってインポートする方法を記述する設定ファイルです。例を使って説明します。
+
 テーブルスキーマで db01 というホストの blog_db というデータベースに、以下のスキーマでデータがあるとします。
-    CREATE TABLE blog_entry (      entry_id INT unsigned NOT NULL AUTO_INCREMENT,      title varbinary(255) NOT NULL DEFAULT '',
+
+    CREATE TABLE blog_entry (
+      entry_id INT unsigned NOT NULL AUTO_INCREMENT,
+      title varbinary(255) NOT NULL DEFAULT '',
       body blob NOT NULL DEFAULT '',
       category_id tinyint unsigned,
       created  timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -226,7 +241,3 @@ DataImportHandlerのqueryやdeltaImportQuery属性で指定したカラム名を
 ### solr.xml
 
 Solrが起動したときに最初にロードするcoreの名前と対応する設定ファイルの位置などを設定するのが solr.xml です。
-
-[CoreAdmin - Solr Wiki](http://wiki.apache.org/solr/CoreAdmin)
-
-(coreをCREATEするときの起動オプションで完全に置き換え可能なことについて言及する)
