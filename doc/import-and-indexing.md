@@ -117,17 +117,17 @@ DataImportHandlerはJDBC経由では1行ずつfetchされたものをインデ�
 
 
 #### インポートクエリ
-** query **
+**query**
 
 初回の全件インポート用のクエリを記述します。
 
-** deltaQuery **
+**deltaQuery**
 
-差分インポートをするにあたって、対象となるレコードの主キーを取得するためのクエリを記述します。ここでは、デフォルトで ** ${dataimporter.last_index_time} ** という、** ローカルのタイムゾーンでの前回のインポート開始時刻 **を変数として参照できます。必要に応じて、[独自の変数を定義することも出来ます](http://wiki.apache.org/solr/DataImportHandlerFaq#Is_it_possible_to_use_core_properties_inside_data-config_xml.3F)。
+差分インポートをするにあたって、対象となるレコードの主キーを取得するためのクエリを記述します。ここでは、デフォルトで **${dataimporter.last_index_time}** という、**ローカルのタイムゾーンでの前回のインポート開始時刻**を変数として参照できます。必要に応じて、[独自の変数を定義することも出来ます](http://wiki.apache.org/solr/DataImportHandlerFaq#Is_it_possible_to_use_core_properties_inside_data-config_xml.3F)。
 
-** deltaImportQuery **
+**deltaImportQuery**
 
-deltaQuery で取得した主キーを元に、更新・追加されたentityをインポートするためのクエリを記述します。ここでは、 ** ${dataimporter.delta.(deltaQueryで取得したカラム)} ** の変数が使えます。上の例では ** ${dataimporter.delta.entry_id} ** を使っています。
+deltaQuery で取得した主キーを元に、更新・追加されたentityをインポートするためのクエリを記述します。ここでは、 **${dataimporter.delta.(deltaQueryで取得したカラム)}** の変数が使えます。上の例では **${dataimporter.delta.entry_id}** を使っています。
 
 #### UTF-8文字列のカラムを正しくインデックスするための設定
 テーブルのカラムに格納されたUTF-8文字列を正しく扱うために必要な設定です。これを設定しないと、マルチバイト文字を正しく認識されず、文字化けすることがあります。
