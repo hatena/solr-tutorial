@@ -1,7 +1,7 @@
 # マシンリソース・レプリケーション・冗長化構成
 ## 必要なマシンリソースの見積もり
 ### ディスク容量
-TextFieldが主体のデータで、かつschema.xml において stored="true" （元のデータをSolrのインデックス内に保持する）と指定している場合、Solrを稼働させるホストではおおむね** 元データの6倍 ** のディスク容量を見積もっておくと安全です。
+TextFieldが主体のデータで、かつschema.xml において stored="true" （元のデータをSolrのインデックス内に保持する）と指定している場合、Solrを稼働させるホストではおおむね**元データの6倍** のディスク容量を見積もっておくと安全です。
 
 これは、 schema.xml における TextField型のフィールドのインデキシングの設定で一般的な設定を行った場合
 、インデックスは元データの約2倍の容量を消費することと、optimize時に元のインデックスと同じサイズの追加のディスク容量が一時的に必要になるためです。 
@@ -44,7 +44,7 @@ SolrMeterを使ってベンチマークをとる場合、ベンチマーク用�
       </lst>
     </requestHandler>
 
-solrconfig.xmlでこう設定しておくと、以下のように HTTPリクエスト時に ** property. ** から始まるパラメータを渡すか、[solrcore.properties という設定ファイルを配置する](http://wiki.apache.org/solr/SolrConfigXml#System_property_substitution)ことで、coreの作成時に solrconfig.xml に変数を渡すことが出来ます。
+solrconfig.xmlでこう設定しておくと、以下のように HTTPリクエスト時に **property.** から始まるパラメータを渡すか、[solrcore.properties という設定ファイルを配置する](http://wiki.apache.org/solr/SolrConfigXml#System_property_substitution)ことで、coreの作成時に solrconfig.xml に変数を渡すことが出来ます。
 
         curl "http://solrhost02:8983/solr/admin/cores?
           action=CREATE&name=blog_entry&property.enable.slave=true&property.master.host=solrhost01"
@@ -63,7 +63,8 @@ Solr自体はデーモン化の仕組みも、フェイルオーバーの仕組�
 
 ### keepalived用failoverスクリプト 
 バックアップ用ホストにkeepalivedをインストールした上で、このようなfailoverスクリプトを配置することで、master,slaveのどちらがダウンした場合もバックアップ用ホストが適切な役割で昇格する仕組みになっています。
-    #!/bin/bash
+
+    #!/bin/bash
     
     # Usage
     # -t SERVICE -c CORE                ... promote the solr to MASTER of <SERVICE>/<CORE>
