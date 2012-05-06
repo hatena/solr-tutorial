@@ -60,7 +60,7 @@ DataImportHandlerを使ってインポートする方法を記述する設定フ
         batchSize="-1"
         useUnicode="true"
         characterEncoding="utf8"
-        useOldUTF8Behavior="true”
+        useOldUTF8Behavior="true"
         readOnly="true" />
       <entity
         name="blog_entry"
