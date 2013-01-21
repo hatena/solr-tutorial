@@ -62,6 +62,7 @@ DataImportHandlerを使ってインポートする方法を記述する設定フ
         characterEncoding="utf8"
         useOldUTF8Behavior="true"
         readOnly="true" />
+      <document name="items">
       <entity
         name="blog_entry"
         dataSource="blog-db"
@@ -103,6 +104,7 @@ DataImportHandlerを使ってインポートする方法を記述する設定フ
         <field column="category" clob="true" />
         <field column="created" dateTimeFormat="yyyy-MM-dd hh:mm:ss z" />
       </entity>
+      </document>
     </dataConfig>
 
 
